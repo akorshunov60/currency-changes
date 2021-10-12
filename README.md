@@ -29,7 +29,7 @@
 ***
 
 Then to start our container, we can simply run:
-'docker run -it -p9090:8080 currency-changes:1.0.0'
+'docker run -it -p18080:8080 currency-changes:1.0.0'
 As with our built image, we need to map the port to make our Spring Boot application
 accessible from outside Docker.
 
@@ -39,18 +39,19 @@ accessible from outside Docker.
 **Parameters**   
 base: string (USD)   
 **_Пример_**   
-`http://localhost:9090/api/gif?base=USD`
+`http://localhost:18080/api/gif?base=USD`
 ------
 - `/api/*`  
 Возвращает gif в зависимости от курса валюты (USD)    
 **_Пример_**   
-`http://localhost:9090/api/*`
+`http://localhost:18080/api/*`
 ***
  ## Примечание
- - API, представляющее gif бесплатно только для базовой валюты USD.
- - Список доступных валют можно посмотреть [здесь](https://openexchangerates.org/api/currencies.json)
- - Добавлено только один кастомный exception.
- - В качестве примера добавлены тесты на контроллер и один сервис.
+ - API, предоставляет бесплатно exchange rates только для base = USD.
+   При запросе, например base = RUB/CAD/AUD, получим ошибку 403 с описанием:
+"Changing the API `base` currency is available for Developer, Enterprise and Unlimited plan clients."
+ - Список доступных валют [здесь](https://openexchangerates.org/api/currencies.json)
+ - В модуле test два теста CurrencyControllerTest и CurrencyServiceTest.
  - API далек от совершенства... в дальнейшем будет улучшаться в рамках изучения Spring Cloud.
- - Логгироание только одного сервиса.
+ - Логгирование одного сервиса GifOnCurrencyExchangeRateServiceImpl.
  - С началом нового дня курс за текущий день недоступен, поэтому приложение будет выдавать ошибку.
