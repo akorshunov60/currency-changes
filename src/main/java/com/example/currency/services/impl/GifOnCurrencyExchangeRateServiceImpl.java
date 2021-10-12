@@ -1,4 +1,4 @@
-package com.example.currency.services.Impl;
+package com.example.currency.services.impl;
 
 import com.example.currency.dto.CurrencyDTO;
 import com.example.currency.dto.GifDTO;
@@ -50,14 +50,14 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
     private String formatDateFromNow(int days) {
         LocalDateTime dateTime = LocalDateTime.now().minusDays(days);
         String dateFromNow = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(dateTime);
-        log.info("Дата с учетом вычета {} дней : {}",days,dateFromNow);
+        log.info("Дата с учетом вычета {} дней : {}", days, dateFromNow);
         return dateFromNow;
     }
 
     private double getRateByDateAndBase(String date, String base) {
         CurrencyDTO currencyDTO = currencyService.getCurrency(date, base.toUpperCase()).getBody();
         double rate = Objects.requireNonNull(currencyDTO).getRates().get("RUB");
-        log.info("Курс рубля на {}: {}",date,rate);
+        log.info("Курс рубля на {}: {}", date, rate);
         return rate;
     }
 

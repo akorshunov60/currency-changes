@@ -1,4 +1,4 @@
-package com.example.currency.services.Impl;
+package com.example.currency.services.impl;
 
 import com.example.currency.client.GifClient;
 import com.example.currency.dto.GifDTO;

@@ -27,9 +27,18 @@
 - Slf4j
 - JUnit 5
 ***
+Spring Boot 2.3 added support for buildpacks.
+Put simply, instead of creating our own Dockerfile
+and building it using something like docker build,
+all we have to do is issue the following command:
 
+'$ ./gradlew bootBuildImage'
+
+For this to work, we need to have Docker installed and running.
 Then to start our container, we can simply run:
+
 'docker run -it -p18080:8080 currency-changes:1.0.0'
+
 As with our built image, we need to map the port to make our Spring Boot application
 accessible from outside Docker.
 

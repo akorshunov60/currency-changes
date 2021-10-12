@@ -1,4 +1,4 @@
-package com.example.currency.services.Impl;
+package com.example.currency.services.impl;
 
 import com.example.currency.client.DownloadClient;
 import com.example.currency.services.DownloadService;
