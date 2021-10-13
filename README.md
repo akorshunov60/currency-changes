@@ -16,9 +16,9 @@
 Для взаимодействия с внешними сервисами используется Feign
 Все параметры (валюта по отношению к которой смотрится курс, адреса внешних сервисов и т.д.)
 вынесены в настройки.
-На сервис написаны тесты (для мока внешних сервисов можно использовать @mockbean или WireMock).
+На сервис написаны тесты (для мока внешних сервисов можно использовать @Mockbean или WireMock).
 Для сборки должен использоваться Gradle.
-Результатом выполнения должен быть репо на GitHub с инструкцией по запуску.   
+Результатом выполнения должен быть репо на GitHub с инструкцией по запуску.
 **Nice to Have**
 Сборка и запуск Docker контейнера с этим сервисом.
 ***
@@ -39,6 +39,8 @@ all we have to do is issue the following command:
 '$ ./gradlew bootBuildImage'
 
 For this to work, we need to have Docker installed and running.
+When we list the available docker images:'docker image ls -a'
+We see a line for the image we just created:'currency-changes 1.0.0'
 Then to start our container, we can simply run:
 
 'docker run -it -p18888:8888 currency-changes:1.0.0'
@@ -47,20 +49,19 @@ As with our built image, we need to map the port to make our Spring Boot applica
 accessible from outside Docker.
 
 ## Endpoints
+
 - `/api/gif`  
-Возвращает gif в зависимости от курса валют   
-**Parameters**   
-base: string (USD)   
-**_Пример_**   
-`http://localhost:18888/api/gif?base=USD`
-------
+Возвращает gif в зависимости от курса валют
+Parameters:
+base: string (USD)
+Пример: `http://localhost:18888/api/gif?base=USD`
+
 - `/api/*`  
 Возвращает gif в зависимости от курса валюты.
-**_Пример_**   
-`http://localhost:18888/api/*`
-***
+Пример: `http://localhost:18888/api/*`
 
- ## Примечание
+ ## Примечание:
+
  - API, предоставляет бесплатно exchange rates только для base = USD.
    При запросе, например base = RUB/CAD/AUD, получим ошибку 403 с описанием:
 "Changing the API `base` currency is available for Developer, Enterprise and Unlimited plan clients."
