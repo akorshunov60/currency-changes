@@ -9,6 +9,7 @@ import com.akorshunov60.currency.services.GifOnCurrencyExchangeRateService;
 import com.akorshunov60.currency.services.GifService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,12 @@ import java.util.Objects;
 @Slf4j(topic = "GifOnCurrencyExchangeRateService")
 @Service
 public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchangeRateService {
+
     private final GifService gifService;
     private final CurrencyService currencyService;
     private final DownloadService downloadService;
 
-    public ResponseEntity<byte[]> getGifByCurrency(String base) {
+    public ResponseEntity<byte[]> getGifByCurrency(@Value("${currency.base}") String base) {
         log.info("Поиск gif по курсу начат");
         if (isBaseNotValid(base)) {
             log.error("Код валюты невалиден");
