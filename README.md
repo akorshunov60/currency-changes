@@ -52,12 +52,12 @@ accessible from outside Docker.
 **Parameters**   
 base: string (USD)   
 **_Пример_**   
-`http://localhost:18080/api/gif?base=USD`
+`http://localhost:18888/api/gif?base=USD`
 ------
 - `/api/*`  
-Возвращает gif в зависимости от курса валюты (USD)    
+Возвращает gif в зависимости от курса валюты.
 **_Пример_**   
-`http://localhost:18080/api/*`
+`http://localhost:18888/api/*`
 ***
 
  ## Примечание
