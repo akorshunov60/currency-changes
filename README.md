@@ -31,7 +31,13 @@
 - Slf4j
 - JUnit 5
 ***
-Spring Boot 2.3 added support for buildpacks.
+Инструкция по установке и запуску приложения в Docker:
+В Unix терминале войти в директорию, куда предварительно склонировать проект с GITHub по ссылке:
+https://github.com/akorshunov60/currency-changes.
+Для дальнейшей работы необходимо, чтобы был установлен и запущен Docker.
+Далее для запуска необходимо:
+
+1. Spring Boot 2.3 added support for buildpacks.
 Put simply, instead of creating our own Dockerfile
 and building it using something like docker build,
 all we have to do is issue the following command:
@@ -39,9 +45,10 @@ all we have to do is issue the following command:
 '$ ./gradlew bootBuildImage'
 
 For this to work, we need to have Docker installed and running.
-When we list the available docker images:'docker image ls -a'
+
+2. When we list the available docker images:'docker image ls -a'
 We see a line for the image we just created:'currency-changes 1.0.0'
-Then to start our container, we can simply run:
+3. Then to start our container, we can simply run:
 
 'docker run -it -p18888:8888 currency-changes:1.0.0'
 
@@ -67,5 +74,5 @@ base: string (USD)
 "Changing the API `base` currency is available for Developer, Enterprise and Unlimited plan clients."
  - Список доступных валют [здесь](https://openexchangerates.org/api/currencies.json)
  - В модуле test два теста CurrencyControllerTest и CurrencyServiceTest.
- - Логгирование одного сервиса GifOnCurrencyExchangeRateServiceImpl.
+ - Логирование одного сервиса GifOnCurrencyExchangeRateServiceImpl.
  - С началом нового дня курс за текущий день недоступен, поэтому приложение будет выдавать ошибку.
