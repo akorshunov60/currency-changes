@@ -24,14 +24,14 @@ import java.util.Objects;
 @Service
 public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchangeRateService {
 
-    private final GifService gifService;
-    private final CurrencyService currencyService;
-    private final DownloadService downloadService;
-
     private static final int TODAY = 0; // интервал для форматирования даты от текущего значения
     private static final int YESTERDAY = 1; // интервал для форматирования даты от текущего значения
     private static final String CURRENCY_CODE = "RUB";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
+    private final GifService gifService;
+    private final CurrencyService currencyService;
+    private final DownloadService downloadService;
 
     public ResponseEntity<byte[]> getGifByCurrency(@Value("${currency.base}") String base) {
         log.info("Поиск gif по курсу начат");
@@ -56,7 +56,7 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
 
     private String getFormatDateFromNow(int days) {
         LocalDateTime dateTime = LocalDateTime.now().minusDays(days);
-        String dateFromNow = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(dateTime);
+        String dateFromNow = DateTimeFormatter.ofPattern(DATE_FORMAT, Locale.ENGLISH).format(dateTime);
         log.info("Дата с учетом вычета {} дней : {}", days, dateFromNow);
         return dateFromNow;
     }
