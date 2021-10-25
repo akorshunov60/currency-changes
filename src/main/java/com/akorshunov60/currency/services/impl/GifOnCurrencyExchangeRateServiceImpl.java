@@ -28,6 +28,7 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
     private static final int YESTERDAY = 1; // интервал для форматирования даты от текущего значения
     private static final String CURRENCY_CODE = "RUB";
     private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final String CURRENT_GIF_URL = "image_original_url";
 
     private final GifService gifService;
     private final CurrencyService currencyService;
@@ -70,7 +71,7 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
 
     private String getGifUrlByTag(String tag) {
         GifDTO gifDTO = gifService.getGifResponse(tag).getBody();
-        String url = String.valueOf(Objects.requireNonNull(gifDTO).getData().get("image_original_url"));
+        String url = String.valueOf(Objects.requireNonNull(gifDTO).getData().get(CURRENT_GIF_URL));
         log.info("Текущий URL gif: {}", url);
         return url;
     }
