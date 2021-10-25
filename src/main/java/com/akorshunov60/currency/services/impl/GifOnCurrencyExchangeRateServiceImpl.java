@@ -28,6 +28,11 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
     private final CurrencyService currencyService;
     private final DownloadService downloadService;
 
+    private static final int TODAY = 0; // интервал для форматирования даты от текущего значения
+    private static final int YESTERDAY = 1; // интервал для форматирования даты от текущего значения
+    private static final String CURRENCY_CODE = "RUB";
+
+
     public ResponseEntity<byte[]> getGifByCurrency(@Value("${currency.base}") String base) {
         log.info("Поиск gif по курсу начат");
         if (isBaseNotValid(base)) {
@@ -35,8 +40,8 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
             throw new BadBaseException("Код валюты должен состоять из 3-х символов");
         }
         log.info("Текущий код валюты: {}", base);
-        String todayDate = formatDateFromNow(0);
-        String yesterdayDate = formatDateFromNow(1);
+        String todayDate = getFormatDateFromNow(TODAY);
+        String yesterdayDate = getFormatDateFromNow(YESTERDAY);
         double todayRate = getRateByDateAndBase(todayDate, base);
         double yesterdayRate = getRateByDateAndBase(yesterdayDate, base);
         String tag = (todayRate > yesterdayRate) ? "rich" : "broke";
@@ -49,7 +54,7 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
         return base.length() != 3;
     }
 
-    private String formatDateFromNow(int days) {
+    private String getFormatDateFromNow(int days) {
         LocalDateTime dateTime = LocalDateTime.now().minusDays(days);
         String dateFromNow = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(dateTime);
         log.info("Дата с учетом вычета {} дней : {}", days, dateFromNow);
@@ -58,7 +63,7 @@ public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchan
 
     private double getRateByDateAndBase(String date, String base) {
         CurrencyDTO currencyDTO = currencyService.getCurrency(date, base.toUpperCase()).getBody();
-        double rate = Objects.requireNonNull(currencyDTO).getRates().get("RUB");
+        double rate = Objects.requireNonNull(currencyDTO).getRates().get(CURRENCY_CODE);
         log.info("Курс рубля на {}: {}", date, rate);
         return rate;
     }
