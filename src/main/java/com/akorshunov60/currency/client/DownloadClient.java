@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.net.URI;
 
-@FeignClient(name = "download-gif-client", url = "https://placeholder")
+@FeignClient(name = "download-gif-client", url = "${download-gif.url}")
 public interface DownloadClient {
 
     @GetMapping

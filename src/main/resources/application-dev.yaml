@@ -8,3 +8,6 @@ currency:
   url: https://docs.openexchangerates.org/
   api_key: ffca962a806d48feb2b7e213ff95194f
   base: USD
+
+download-gif:
+  url: https://placeholder
