@@ -1,11 +1,11 @@
 spring:
 
 gif:
-  url: https://developers.giphy.com/docs/api#quick-start-guide
+  url: https://api.giphy.com/v1/gifs
   api_key: SsZYyPw4gbOeoL8pCOy7pzuCBOeOWEBF
 
 currency:
-  url: https://docs.openexchangerates.org/
+  url: https://openexchangerates.org/api/historical
   api_key: ffca962a806d48feb2b7e213ff95194f
   base: USD
 

@@ -24,11 +24,11 @@ import java.util.Objects;
 @Service
 public class GifOnCurrencyExchangeRateServiceImpl implements GifOnCurrencyExchangeRateService {
 
-    private static final int TODAY = 0; // интервал для форматирования даты от текущего значения
-    private static final int YESTERDAY = 1; // интервал для форматирования даты от текущего значения
-    private static final String CURRENCY_CODE = "RUB";
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final String CURRENT_GIF_URL = "image_original_url";
+    private final int TODAY = 0; // интервал для форматирования даты от текущего значения
+    private final int YESTERDAY = 1; // интервал для форматирования даты от текущего значения
+    private final String CURRENCY_CODE = "RUB";
+    private final String DATE_FORMAT = "yyyy-MM-dd";
+    private final String CURRENT_GIF_URL = "image_original_url";
 
     private final GifService gifService;
     private final CurrencyService currencyService;

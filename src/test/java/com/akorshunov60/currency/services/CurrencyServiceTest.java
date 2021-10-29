@@ -17,18 +17,21 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class CurrencyServiceTest {
 
+    private final String CURRENCY_CODE = "RUB";
+    private final String DATE_FORMAT = "yyyy-MM-dd";
+
     @Autowired
     private CurrencyService currencyService;
 
     @Test
     @DisplayName("Проверка корректности ответа от currency api")
     public void getCurrency() {
-        String date = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(LocalDateTime.now());
+        String date = DateTimeFormatter.ofPattern(DATE_FORMAT, Locale.ENGLISH).format(LocalDateTime.now());
         ResponseEntity<CurrencyDTO> response = currencyService.getCurrency(date,"USD");
         assertAll(
                 () -> assertEquals(response.getStatusCodeValue(), 200),
                 () -> assertNotNull(response.getBody()),
-                () -> assertNotNull(Objects.requireNonNull(response.getBody()).getRates().get("RUB"))
+                () -> assertNotNull(Objects.requireNonNull(response.getBody()).getRates().get(CURRENCY_CODE))
         );
     }
 }

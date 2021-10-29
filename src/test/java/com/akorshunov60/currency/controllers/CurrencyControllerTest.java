@@ -16,6 +16,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class CurrencyControllerTest {
 
+    private final String CURRENCY_CODE = "USD";
+
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -30,7 +33,7 @@ public class CurrencyControllerTest {
     @DisplayName("Получение GIF")
     public void getGif() throws Exception {
         mockMvc.perform(get("/api/gif/")
-                        .param("base", "USD"))
+                        .param("base", CURRENCY_CODE))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.IMAGE_GIF));
     }
